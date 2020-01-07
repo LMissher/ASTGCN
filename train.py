@@ -55,11 +55,13 @@ num_of_days = int(training_config['num_of_days'])
 num_of_hours = int(training_config['num_of_hours'])
 merge = bool(int(training_config['merge']))
 
+print(ctx)
+
 # select devices
-if ctx.startswith('cpu'):
+if ctx == 'cpu':
     ctx = mx.cpu()
-elif ctx.startswith('gpu'):
-    ctx = mx.gpu(int(ctx[ctx.index('-') + 1:]))
+elif ctx == 'gpu':
+    ctx = mx.gpu(4)
 
 # import model
 print('Model is %s' % (model_name))
