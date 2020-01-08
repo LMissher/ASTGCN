@@ -135,8 +135,7 @@ def get_adjacency_matrix(distance_df_filename, num_of_vertices):
     A = np.zeros((int(num_of_vertices), int(num_of_vertices)),
                  dtype=np.float32)
 
-    for i, j in edges:
-        A[i, j] = mat[i, j]
+    A[:, :] = mat[:,:]
 
     return A
 
