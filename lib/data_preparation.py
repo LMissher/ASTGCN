@@ -82,7 +82,8 @@ def read_and_generate_dataset(graph_signal_matrix_filename,
             np.expand_dims(target, axis=0).transpose((0, 2, 3, 1))[:, :, 0, :]
         ))
 
-    all_samples *= 0.2
+    # len_all = len(all_samples)*0.2
+    # all_samples = all_samples[:len_all]
     split_line1 = int(len(all_samples) * 0.6)
     split_line2 = int(len(all_samples) * 0.8)
 
