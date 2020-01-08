@@ -29,9 +29,13 @@ def normalization(train, val, test):
     def normalize(x):
         return (x - mean) / std
 
-    train_norm = normalize(train)
-    val_norm = normalize(val)
-    test_norm = normalize(test)
+    # train_norm = normalize(train)
+    # val_norm = normalize(val)
+    # test_norm = normalize(test)
+
+    train_norm = train
+    val_norm = val
+    test_norm = test
 
     return {'mean': mean, 'std': std}, train_norm, val_norm, test_norm
 
@@ -112,20 +116,20 @@ def read_and_generate_dataset(graph_signal_matrix_filename,
     print('testing data: week: {}, day: {}, recent: {}, target: {}'.format(
         test_week.shape, test_day.shape, test_hour.shape, test_target.shape))
 
-    # (week_stats, train_week_norm,
-    #  val_week_norm, test_week_norm) = normalization(train_week,
-    #                                                 val_week,
-    #                                                 test_week)
+    (week_stats, train_week_norm,
+     val_week_norm, test_week_norm) = normalization(train_week,
+                                                    val_week,
+                                                    test_week)
 
-    # (day_stats, train_day_norm,
-    #  val_day_norm, test_day_norm) = normalization(train_day,
-    #                                               val_day,
-    #                                               test_day)
+    (day_stats, train_day_norm,
+     val_day_norm, test_day_norm) = normalization(train_day,
+                                                  val_day,
+                                                  test_day)
 
-    # (recent_stats, train_recent_norm,
-    #  val_recent_norm, test_recent_norm) = normalization(train_hour,
-    #                                                     val_hour,
-    #                                                     test_hour)
+    (recent_stats, train_recent_norm,
+     val_recent_norm, test_recent_norm) = normalization(train_hour,
+                                                        val_hour,
+                                                        test_hour)
 
     all_data = {
         'train': {
