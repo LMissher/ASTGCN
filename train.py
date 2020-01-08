@@ -61,7 +61,7 @@ print(ctx)
 if ctx == 'cpu':
     ctx = mx.cpu()
 elif ctx == 'gpu':
-    ctx = mx.gpu(4)
+    ctx = mx.gpu(7)
 
 # import model
 print('Model is %s' % (model_name))
