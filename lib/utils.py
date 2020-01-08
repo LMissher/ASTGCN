@@ -3,6 +3,7 @@
 
 import csv
 import numpy as np
+import pandas as pd
 from scipy.sparse.linalg import eigs
 
 from .metrics import mean_absolute_error, mean_squared_error, masked_mape_np
@@ -129,16 +130,13 @@ def get_adjacency_matrix(distance_df_filename, num_of_vertices):
 
     '''
 
-    with open(distance_df_filename, 'r') as f:
-        reader = csv.reader(f)
-        header = f.__next__()
-        edges = [(int(i[0]), int(i[1])) for i in reader]
+    mat = pd.read_csv(distance_df_filename, header=None).values
 
     A = np.zeros((int(num_of_vertices), int(num_of_vertices)),
                  dtype=np.float32)
 
     for i, j in edges:
-        A[i, j] = 1
+        A[i, j] = mat[i, j]
 
     return A
 
