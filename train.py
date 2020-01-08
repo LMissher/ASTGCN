@@ -208,8 +208,8 @@ if __name__ == "__main__":
                           value=training_loss,
                           global_step=global_step)
 
-            print('global step: %s, training loss: %.2f, time: %.2fs'
-                  % (global_step, training_loss, time() - start_time))
+            # print('global step: %s, training loss: %.2f, time: %.2fs'
+                  # % (global_step, training_loss, time() - start_time))
             global_step += 1
 
         # logging the gradients of parameters for checking convergence

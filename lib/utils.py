@@ -218,8 +218,8 @@ def compute_val_loss(net, val_loader, loss_function, sw, epoch):
         output = net([val_w, val_d, val_r])
         l = loss_function(output, val_t)
         tmp.extend(l.asnumpy().tolist())
-        print('validation batch %s / %s, loss: %.2f' % (
-            index + 1, val_loader_length, l.mean().asscalar()))
+        # print('validation batch %s / %s, loss: %.2f' % (
+            # index + 1, val_loader_length, l.mean().asscalar()))
 
     validation_loss = sum(tmp) / len(tmp)
     sw.add_scalar(tag='validation_loss',
@@ -249,8 +249,8 @@ def predict(net, test_loader):
     prediction = []
     for index, (test_w, test_d, test_r, _) in enumerate(test_loader):
         prediction.append(net([test_w, test_d, test_r]).asnumpy())
-        print('predicting testing set batch %s / %s' % (index + 1,
-                                                        test_loader_length))
+        # print('predicting testing set batch %s / %s' % (index + 1,
+                                                        # test_loader_length))
     prediction = np.concatenate(prediction, 0)
     return prediction
 
@@ -279,7 +279,7 @@ def evaluate(net, test_loader, true_value, num_of_vertices, sw, epoch):
     prediction = predict(net, test_loader)
     prediction = (prediction.transpose((0, 2, 1))
                   .reshape(prediction.shape[0], -1))
-    for i in [3, 6, 12]:
+    for i in [1]:
         print('current epoch: %s, predict %s points' % (epoch, i))
 
         mae = mean_absolute_error(true_value[:, : i * num_of_vertices],
