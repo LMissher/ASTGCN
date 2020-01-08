@@ -23,19 +23,19 @@ def normalization(train, val, test):
 
     assert train.shape[1:] == val.shape[1:] and val.shape[1:] == test.shape[1:]
 
-    mean = train.mean(axis=0, keepdims=True)
-    std = train.std(axis=0, keepdims=True)
+    mean = train.mean(axis=(0,1,3), keepdims=True)
+    std = train.std(axis=(0,1,3), keepdims=True)
 
     def normalize(x):
         return (x - mean) / std
 
-    # train_norm = normalize(train)
-    # val_norm = normalize(val)
-    # test_norm = normalize(test)
+    train_norm = normalize(train)
+    val_norm = normalize(val)
+    test_norm = normalize(test)
 
-    train_norm = train
-    val_norm = val
-    test_norm = test
+    # train_norm = train
+    # val_norm = val
+    # test_norm = test
 
     return {'mean': mean, 'std': std}, train_norm, val_norm, test_norm
 
@@ -88,8 +88,8 @@ def read_and_generate_dataset(graph_signal_matrix_filename,
 
     # len_all = len(all_samples)*0.2
     # all_samples = all_samples[:len_all]
-    split_line1 = int(len(all_samples) * 0.6)
-    split_line2 = int(len(all_samples) * 0.8)
+    split_line1 = int(len(all_samples) * 0.8)
+    split_line2 = int(len(all_samples) * 0.9)
 
     if not merge:
         training_set = [np.concatenate(i, axis=0)
